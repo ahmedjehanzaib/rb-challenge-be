@@ -136,6 +136,62 @@ const validationSchema = {
 			userId: JOI.string().guid().required()
 		}
 	},
+
+	// POST /api/v1/recommendations/
+	createRecommendation: {
+		headers: {
+			// token
+		},
+		body: {
+			name: JOI.string().trim().required(),
+			description: JOI.string().trim().allow('', null).optional(),
+			tags: JOI.array().allow('', null).optional(),
+		}
+	},
+	// GET /api/v1/recommendations/:id
+	findRecommendation: {
+		headers: {
+			// token
+		},
+		params: {
+			id: JOI.string().guid().required()
+		}
+	},
+	// PUT /api/v1/recommendations/:id
+	updateRecommendation: {
+		headers: {
+			// token
+		},
+		params: {
+			id: JOI.string().guid().required()
+		},
+		body: {
+			name: JOI.string().trim().required(),
+			description: JOI.string().trim().allow('', null).optional(),
+			tags: JOI.array().allow('', null).optional(),
+		}
+	},
+	// DELETE /api/v1/recommendations/:id
+	deleteRecommendations: {
+		headers: {
+			// token
+		},
+		params: {
+			id: JOI.string().guid().required()
+		}
+	},
+	// POST /api/v1/recommendations/:id/upvote
+	upvoteRecommendation: {
+		headers: {
+			// token
+		},
+		params: {
+			id: JOI.string().guid().required()
+		},
+		body: {
+		}
+	},
+
 }
 
 export { validationSchema };

@@ -11,7 +11,7 @@ import * as cookieParser from "cookie-parser";
 
 import { log } from "../log";
 import { validateUser } from '../config'
-import { authenticationRouter, activitiesRouter, usersRouter } from "../collections";
+import { authenticationRouter, activitiesRouter, usersRouter, recommendationsRouter } from "../collections";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -79,6 +79,7 @@ app.use(`${app.locals.baseUri}/tests`, express.static("docs/tests/", { extension
 app.use(`${app.locals.baseUri}/authentication`, json(), authenticationRouter());
 app.use(`${app.locals.baseUri}/activities`, validateUser, json(), activitiesRouter());
 app.use(`${app.locals.baseUri}/users`, validateUser, json(), usersRouter());
+app.use(`${app.locals.baseUri}/recommendations`, validateUser, json(), recommendationsRouter());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**
