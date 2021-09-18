@@ -41,6 +41,8 @@ export function usersRouter(): Router {
 			if (validated.error === null) {
 				const user = await userFacade.findUserById(req.user.id);
 				if (user.length > 0) {
+					req.body.skills = req.body.skills ? JSON.stringify(req.body.skills) : null
+					req.body.interests = req.body.interests ? JSON.stringify(req.body.interests) : null
 					const updatedUser = await userFacade.updateAUser(req.user.id, Object.keys(req.body) ? req.body : {});
 					res.status(200).json({ data: updatedUser[0], error: null, message: 'User has been updated successfully!' });
 				} else {

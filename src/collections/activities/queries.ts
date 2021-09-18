@@ -7,7 +7,11 @@ const activitiesQueries = {
     },
     findActivityById: (activityId: string) => {
 		return {
-			text: `SELECT * FROM activities WHERE id = $1`,
+			text: `SELECT activities.*, row_to_json(users.*) as created_by_obj
+			FROM activities
+			INNER JOIN users ON users.id = activities.created_by
+			WHERE activities.id = $1
+			GROUP BY users.id, activities.id`,
 			values: [activityId]
 		};
 	},
@@ -32,7 +36,10 @@ const activitiesQueries = {
     },
 	findAllActivities: () => {
 		return {
-			text: `SELECT * FROM activities`,
+			text: `SELECT activities.*, row_to_json(users.*) as created_by_obj
+			FROM activities
+			INNER JOIN users ON users.id = activities.created_by
+			GROUP BY users.id, activities.id`,
 			values: []
 		};
 	},

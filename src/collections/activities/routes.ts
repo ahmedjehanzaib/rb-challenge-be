@@ -21,7 +21,7 @@ export function activitiesRouter(): Router {
 					name: req.body.name,
 					description: req.body.description ? req.body.description : null,
 					type: req.body.type,
-					tags: req.body.tags ? req.body.tags : null,
+					tags: req.body.tags ? JSON.stringify(req.body.tags) : null,
 					location: req.body.location ? req.body.location : null,
 					start_time: req.body.start_time,
 					end_time: req.body.end_time,
@@ -71,6 +71,7 @@ export function activitiesRouter(): Router {
 					log.warn({ message: 'Activity not exist!', statusCode: 404, detail: 'Activity not exist!', repo: 'rb-challenge-be', path: '/api/v1/activities/:id' });
 					res.status(404).json({ data: null, error: true, message: 'Activity not exist!' });
 				} else {
+					req.body.tags = req.body.tags ? JSON.stringify(req.body.tags) : null
 					const updatedActivity = await activitiesFacade.updateActivityById(req.params.id, req.body);
 					res.status(200).json({ data: updatedActivity[0], error: null, message: 'Activity updated successfully!' });
 				}
