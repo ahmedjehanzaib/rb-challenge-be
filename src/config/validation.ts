@@ -29,6 +29,100 @@ const validationSchema = {
 			password: JOI.string().required(),
 		}
 	},
+
+	// GET /api/v1/users/:id
+	getAUser: {
+		headers: {
+			// token
+		},
+		params: {
+			id: JOI.string().guid().required(),
+		}
+	},
+
+	// PUT /api/v1/users/
+	updateAUser: {
+		headers: {
+			// token
+		},
+		params: {
+		},
+		body: {
+			name: JOI.string().allow('', null).optional(),
+			company: JOI.string().allow('', null).optional(),
+			designation: JOI.string().allow('', null).optional(),
+			industry: JOI.string().allow('', null).optional(),
+			phone_number: JOI.string().allow('', null).optional(),
+			country: JOI.string().allow('', null).optional(),
+			city: JOI.string().allow('', null).optional(),
+			address: JOI.string().allow('', null).optional(),
+			gender: JOI.string().allow('', null).optional(),
+			date_of_birth: JOI.string().allow('', null).optional(),
+			linkedin_profile: JOI.string().allow('', null).optional(),
+			github_profile: JOI.string().allow('', null).optional(),
+			interests: JOI.string().allow('', null).optional(),
+			skills: JOI.string().allow('', null).optional(),
+			picture_url: JOI.string().allow('', null).optional(),
+			meta_data: JOI.object().allow('', null).optional(),
+		}
+	},
+
+	// POST /api/v1/activities/
+	createActivity: {
+		headers: {
+			// token
+		},
+		body: {
+			name: JOI.string().trim().required(),
+			description: JOI.string().trim().allow('', null).optional(),
+			type: JOI.string().trim().required(),
+			tags: JOI.string().trim().allow('', null).optional(),
+			location: JOI.string().trim().allow('', null).optional(),
+			start_time: JOI.string().trim().required(),
+			end_time: JOI.string().trim().required(),
+			allowed_participants: JOI.number().required(),
+		}
+	},
+
+	// GET /api/v1/activites/:id
+	findAnActivity: {
+		headers: {
+			// token
+		},
+		params: {
+			id: JOI.string().guid().required()
+		}
+	},
+
+	// PUT /api/v1/activites/:id
+	updateAnActivity: {
+		headers: {
+			// token
+		},
+		params: {
+			id: JOI.string().guid().required()
+		},
+		body: {
+			name: JOI.string().trim().required(),
+			description: JOI.string().trim().allow('', null).optional(),
+			type: JOI.string().trim().required(),
+			tags: JOI.string().trim().allow('', null).optional(),
+			location: JOI.string().trim().allow('', null).optional(),
+			start_time: JOI.string().trim().required(),
+			end_time: JOI.string().trim().required(),
+			allowed_participants: JOI.number().required(),
+		}
+	},
+
+	// DELETE /api/v1/activites/:id
+	deleteAnActivity: {
+		headers: {
+			// token
+		},
+		params: {
+			id: JOI.string().guid().required()
+		}
+	},
 }
 
 export { validationSchema };

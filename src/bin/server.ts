@@ -8,8 +8,10 @@ import { Server } from "http";
 import * as passport from "passport";
 import * as session from "express-session";
 import * as cookieParser from "cookie-parser";
+
 import { log } from "../log";
-import { authenticationRouter } from "../collections";
+import { validateUser } from '../config'
+import { authenticationRouter, activitiesRouter, usersRouter } from "../collections";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -74,12 +76,9 @@ app.use(`${app.locals.baseUri}/tests`, express.static("docs/tests/", { extension
  * Server routing (Application)
  */
 /////////////////////////////////////////////////////////////////////////////////////////////////
-app.use(
-  `${app.locals.baseUri}/authentication`,
-  json(),
-  authenticationRouter()
-);
-app.use(json());
+app.use(`${app.locals.baseUri}/authentication`, json(), authenticationRouter());
+app.use(`${app.locals.baseUri}/activities`, validateUser, json(), activitiesRouter());
+app.use(`${app.locals.baseUri}/users`, validateUser, json(), usersRouter());
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**
