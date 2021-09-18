@@ -53,6 +53,51 @@ const activitiesFacade = {
 			throw err;
 		}
 	},
+	findActivityOwnerByUserId: async(userId: string, activityId: string) => {
+		try {
+			const { rows } = await PG_CLIENT.query(activitiesQueries.findActivityOwnerByUserId(userId, activityId));
+			return rows;
+		} catch (err) {
+			log.error('Error in finding activity owner:', err);
+			throw err;
+		}
+	},
+	findActivityUserRequest: async(userId: string, activityId: string) => {
+		try {
+			const { rows } = await PG_CLIENT.query(activitiesQueries.findActivityUserRequest(userId, activityId));
+			return rows;
+		} catch (err) {
+			log.error('Error in finding activity user request:', err);
+			throw err;
+		}
+	},
+	findActivityParticipants: async(activityId: string) => {
+		try {
+			const { rows } = await PG_CLIENT.query(activitiesQueries.findActivityParticipants(activityId));
+			return rows;
+		} catch (err) {
+			log.error('Error in finding activity participants:', err);
+			throw err;
+		}
+	},
+	addActivityRequest: async(userId: string, activityId: string) => {
+		try {
+			const { rows } = await PG_CLIENT.query(activitiesQueries.addActivityRequest(activityId, userId));
+			return rows;
+		} catch (err) {
+			log.error('Error in adding activity user request:', err);
+			throw err;
+		}
+	},
+	approveActivityRequest: async(userId: string, activityId: string) => {
+		try {
+			const { rows } = await PG_CLIENT.query(activitiesQueries.approveActivityRequest(activityId, userId));
+			return rows;
+		} catch (err) {
+			log.error('Error in approving activity user request:', err);
+			throw err;
+		}
+	},
 }
 
 export { activitiesFacade };

@@ -36,5 +36,35 @@ const activitiesQueries = {
 			values: []
 		};
 	},
+	findActivityOwnerByUserId: (userId: string, activityId: string) => {
+		return {
+			text: `SELECT * FROM activities WHERE created_by = $1 AND id = $2`,
+			values: [userId, activityId]
+		};
+	},
+	findActivityUserRequest: (userId: string, activityId: string) => {
+		return {
+			text: `SELECT * FROM activity_participants WHERE activity_id = $1 AND participant_id = $2`,
+			values: [activityId, userId]
+		};
+	},
+	addActivityRequest: (activityId: string, userId: string) => {
+		return {
+			text: `INSERT INTO activity_participants(activity_id, participant_id, status) VALUES ($1, $2, $3) RETURNING *`,
+			values: [activityId, userId, 'pending']
+		};
+    },
+	approveActivityRequest: (activityId: string, participantId: string) => {
+		return {
+			text: `UPDATE activity_participants set status = 'approved' WHERE activity_id = $1 AND participant_id = $2 RETURNING *`,
+			values: [activityId, participantId]
+		};
+    },
+	findActivityParticipants: (activityId: string) => {
+		return {
+			text: `SELECT Count(*) as count FROM activity_participants WHERE activity_id = $1 AND status = 'approved'`,
+			values: [activityId]
+		};
+	},
 }
 export { activitiesQueries };

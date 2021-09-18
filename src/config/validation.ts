@@ -123,6 +123,19 @@ const validationSchema = {
 			id: JOI.string().guid().required()
 		}
 	},
+
+	// POST /api/v1/activities/:id/approve
+	approveActivityRequest: {
+		headers: {
+			// token
+		},
+		params: {
+			id: JOI.string().guid().required()
+		},
+		body: {
+			userId: JOI.string().guid().required()
+		}
+	},
 }
 
 export { validationSchema };
