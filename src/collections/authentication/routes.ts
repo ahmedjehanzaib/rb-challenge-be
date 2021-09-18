@@ -68,7 +68,7 @@ export function authenticationRouter(): Router {
 							const token = jwt.sign({ id: user.id }, 'RB-CHALLENGE-BE', {
 								expiresIn: 86400
 							})
-							res.status(200).send({ token: token, err: null, message: 'You are successfully logged in!'});
+							res.status(200).send({ token: token, profile: user,  err: null, message: 'You are successfully logged in!'});
 						});
 					}
 				  })(req, res);

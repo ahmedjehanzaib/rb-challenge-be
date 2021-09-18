@@ -35,7 +35,26 @@ passport.use(new LocalStrategy({
 				if (!isValid) {
 					return done(null, false, { message: 'Invalid credentials' });
 				}
-				return done(null, { id: user.id  })
+				return done(null, { 
+					id: user.id,
+					name: user.name,
+					email: user.email,
+					picture_url: user.picture_url,
+					company: user.company,
+					designation: user.designation,
+					industry: user.industry,
+					phone_number: user.phone_number,
+					country: user.country,
+					city: user.city,
+					address: user.address,
+					gender: user.gender,
+					date_of_birth: user.data_of_birth,
+					linkedin_profile: user.linkedin_profile,
+					github_profile: user.github_profile,
+					interests: user.interests,
+					skills: user.skills,
+					meta_data: user.meta_data
+				})
 			})
 		}
 	}
