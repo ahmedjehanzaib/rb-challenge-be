@@ -14,8 +14,8 @@ const validationSchema = {
 			company: JOI.string().required().error(new Error('Company is not allowed to be empty!')),
 			city: JOI.string().required().error(new Error('City is not allowed to be empty!')),
 			country: JOI.string().required().error(new Error('Country is not allowed to be empty!')),
-			skills: JOI.string().required().error(new Error('Skills is not allowed to be empty!')),
-			interests: JOI.string().required().error(new Error('Interests is not allowed to be empty!')),
+			skills: JOI.array().required().error(new Error('Skills is not allowed to be empty!')),
+			interests: JOI.array().required().error(new Error('Interests is not allowed to be empty!')),
 		}
 	},
 
@@ -60,8 +60,8 @@ const validationSchema = {
 			date_of_birth: JOI.string().allow('', null).optional(),
 			linkedin_profile: JOI.string().allow('', null).optional(),
 			github_profile: JOI.string().allow('', null).optional(),
-			interests: JOI.string().allow('', null).optional(),
-			skills: JOI.string().allow('', null).optional(),
+			interests: JOI.object().allow('', null).optional(),
+			skills: JOI.object().allow('', null).optional(),
 			picture_url: JOI.string().allow('', null).optional(),
 			meta_data: JOI.object().allow('', null).optional(),
 		}

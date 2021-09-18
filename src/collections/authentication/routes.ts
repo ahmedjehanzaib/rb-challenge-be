@@ -35,8 +35,8 @@ export function authenticationRouter(): Router {
 						company: req.body.company,
 						city: req.body.city,
 						country: req.body.country,
-						skills: req.body.skills,
-						interests: req.body.interests,
+						skills: JSON.stringify(req.body.skills),
+						interests: JSON.stringify(req.body.interests),
 					});
 					delete user.password;
 					// Sent an email for user email verification
