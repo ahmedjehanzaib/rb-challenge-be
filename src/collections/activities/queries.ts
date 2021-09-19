@@ -39,7 +39,8 @@ const activitiesQueries = {
 			text: `SELECT activities.*, row_to_json(users.*) as created_by_obj
 			FROM activities
 			INNER JOIN users ON users.id = activities.created_by
-			GROUP BY users.id, activities.id`,
+			where activities.end_time <= now()
+			GROUP BY users.id, activities.id, activities.start_time`,
 			values: []
 		};
 	},
