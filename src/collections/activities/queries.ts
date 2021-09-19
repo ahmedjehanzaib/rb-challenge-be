@@ -40,7 +40,8 @@ const activitiesQueries = {
 			FROM activities
 			INNER JOIN users ON users.id = activities.created_by
 			where activities.end_time >= now()
-			GROUP BY users.id, activities.id, activities.start_time`,
+			GROUP BY users.id, activities.id
+			SORT BY activities.start_time ASC`,
 			values: []
 		};
 	},
